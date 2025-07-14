@@ -15,7 +15,7 @@ app.use(cors());
 app.use(express.json());
 
 // Import routes (your file: restaurant.js)
-const restaurantRoutes = require('./restaurant');
+const restaurantRoutes = require('./restaurantRoutes');
 
 // Use the route
 app.use('/api/restaurants', restaurantRoutes);
