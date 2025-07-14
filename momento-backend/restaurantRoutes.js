@@ -1,7 +1,7 @@
 // routes/restaurantRoutes.js
 const express = require('express');
 const router = express.Router();
-const Restaurant = require('./restaurant');
+const Restaurant = require('./Restaurant');
 
 // GET all restaurants
 router.get('/', async (req, res) => {
