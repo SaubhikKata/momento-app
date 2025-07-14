@@ -1,7 +1,34 @@
 const express = require('express');
+const mongoose = require('mongoose');
+const cors = require('cors');
+const dotenv = require('dotenv');
+const restaurantRoutes = require('./routes/restaurantRoutes');
+
+dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-app.get('/', (req, res) => res.send('Momento backend is running!'));
+app.use(cors());
+app.use(express.json());
 
-app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
+// Use routes
+app.use('/api/restaurants', restaurantRoutes);
+
+// Root route
+app.get('/', (req, res) => {
+  res.send('Momento Backend is Live 🍽️');
+});
+
+// MongoDB Connection
+mongoose
+  .connect(process.env.MONGO_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+  })
+  .then(() => {
+    console.log('Connected to MongoDB');
+    app.listen(PORT, () => {
+      console.log(`Server connected on port ${PORT}`);
+    });
+  })
+  .catch((err) => console.log(err));
